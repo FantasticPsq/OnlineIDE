@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Online IDE to run the code: </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div class="container">
+
+
+    <h1>Online-IDE</h1>
+        <label for="language">Computing option:</label>
+        <select name="language" id="language">
+            <option value="languageType"><p th:text="${codeText.languageString}"/></option>
+        </select>
+        <br><br>
+
+        <label for="w3review">Your Code:</label>
+        <textarea id="w3review" name="w3review" rows="30" cols="70" th:text="${codeText.code}">
+  </textarea>
+    <br><br>
+    <label for="w4review">Output:</label>
+    <textarea id="w4review" name="w4review" rows="5" cols="50" th:text="${output}">
+        </textarea>
+
+</div>
+</body>
+
+</html>
