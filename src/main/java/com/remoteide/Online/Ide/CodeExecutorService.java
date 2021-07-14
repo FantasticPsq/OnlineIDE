@@ -9,6 +9,12 @@ public class CodeExecutorService {
     private FileOperationsService fileOperationsService;
     @Autowired
     private CppSolverService cppSolverService;
+    @Autowired
+    private JavaSolverService javaSolverService;
+    @Autowired
+    private PythonSolverService pythonSolverService;
+    @Autowired
+    private JavaScriptSolverService javaScriptSolverService;
 
     private String getExtension(String language) {
         if (language.equalsIgnoreCase("C++")) {
@@ -32,7 +38,7 @@ public class CodeExecutorService {
     public String executeCode(String language, String code) {
 
         String path = generatePath(language);
-
+    //Why Not Success in both condition
         if (fileOperationsService.createFile(path)) {
             boolean response = fileOperationsService.writeToFile(path, code);
             if (response == false) {
@@ -41,8 +47,16 @@ public class CodeExecutorService {
         } else {
             return "Not Success";
         }
+        if (language.equalsIgnoreCase("C++")) {
+            return cppSolverService.execute(path);
+        } else if (language.equalsIgnoreCase("Java")) {
+            return javaSolverService.execute(path);
+        } else if (language.equalsIgnoreCase("Python")) {
+            return pythonSolverService.execute(path);
+        } else {
+            return javaScriptSolverService.execute(path);
+        }
 
-        return cppSolverService.execute(path);
     }
 
 }
