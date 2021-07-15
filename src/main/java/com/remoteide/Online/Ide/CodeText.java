@@ -6,6 +6,18 @@ import java.util.Random;
 public class CodeText {
     private String languageString;
     private String code;
+    private String input;
+
+    public String getInput() {
+        return input;
+    }
+
+    public void setInput(String input) {
+        this.input = input;
+    }
+
+
+
 
     public String getLanguageString() {
         return languageString;

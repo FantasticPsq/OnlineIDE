@@ -22,7 +22,7 @@ public class IndexController {
     @PostMapping("/codeText")
     public String greetingSubmit(@ModelAttribute CodeText codeText, Model model) {
         model.addAttribute("codeText", codeText);
-        String output = codeExecutorService.executeCode(codeText.getLanguageString(), codeText.getCode());
+        String output = codeExecutorService.executeCode(codeText.getLanguageString(), codeText.getCode(), codeText.getInput());
         model.addAttribute("output", output);
         return "Success";
     }

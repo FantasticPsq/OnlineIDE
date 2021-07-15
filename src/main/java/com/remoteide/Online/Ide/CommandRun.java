@@ -25,7 +25,7 @@ public class CommandRun {
         return outputString;
     }
 
-    public TerminalResponse compilerCommandRun(String command) {
+    public TerminalResponse compilerCommandRun(String command, String input) {
         TerminalResponse terminalResponse = new TerminalResponse(false, "", "");
         try {
             //boolean status = true;
@@ -33,7 +33,7 @@ public class CommandRun {
             if (command.equalsIgnoreCase("./Solution")) {
                 OutputStream outputStream = p.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream));
-                writer.write("20");
+                writer.write(input);
                 writer.flush();
                 writer.close();
             }

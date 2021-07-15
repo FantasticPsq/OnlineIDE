@@ -10,9 +10,9 @@ public class CppSolverService {
     @Autowired
     private CommandRun commandRun;
 
-    public String execute(String path)  {
+    public String execute(String path, String input)  {
         String command = "g++ " + path + " -o " + "Solution";
-        TerminalResponse terminalResponse = commandRun.compilerCommandRun(command);
+        TerminalResponse terminalResponse = commandRun.compilerCommandRun(command, null);
         if (!terminalResponse.getStatus()) {
             return "Code not executed";
         }
@@ -25,7 +25,7 @@ public class CppSolverService {
             return terminalResponse.getTerminalError();
         }
 
-        terminalResponse = commandRun.compilerCommandRun("./Solution");
+        terminalResponse = commandRun.compilerCommandRun("./Solution", input);
         if (!terminalResponse.getStatus()) {
             return "Code not executed";
         }

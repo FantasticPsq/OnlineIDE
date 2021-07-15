@@ -35,7 +35,7 @@ public class CodeExecutorService {
         return path;
     }
 
-    public String executeCode(String language, String code) {
+    public String executeCode(String language, String code, String input) {
 
         String path = generatePath(language);
     //Why Not Success in both condition
@@ -48,9 +48,9 @@ public class CodeExecutorService {
             return "Not Success";
         }
         if (language.equalsIgnoreCase("C++")) {
-            return cppSolverService.execute(path);
+            return cppSolverService.execute(path, input);
         } else if (language.equalsIgnoreCase("Java")) {
-            return javaSolverService.execute(path);
+            return javaSolverService.execute(path, input);
         } else if (language.equalsIgnoreCase("Python")) {
             return pythonSolverService.execute(path);
         } else {

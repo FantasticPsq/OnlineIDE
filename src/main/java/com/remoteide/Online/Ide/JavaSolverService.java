@@ -9,9 +9,9 @@ public class JavaSolverService {
     @Autowired
     private CommandRun commandRun;
 
-    public String execute(String path) {
+    public String execute( String path, String input) {
         String command = "javac " + path;
-        TerminalResponse terminalResponse = commandRun.compilerCommandRun(command);
+        TerminalResponse terminalResponse = commandRun.compilerCommandRun(command, null);
         if (!terminalResponse.getStatus()) {
             return "Code not executed";
         }
@@ -20,7 +20,7 @@ public class JavaSolverService {
             return terminalResponse.getTerminalError();
         }
 
-        terminalResponse = commandRun.compilerCommandRun("java Solution");
+        terminalResponse = commandRun.compilerCommandRun("java Solution", input);
         if (!terminalResponse.getStatus()) {
             return "Code not executed";
         }
