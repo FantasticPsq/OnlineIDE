@@ -2,10 +2,7 @@ package com.remoteide.Online.Ide;
 
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 
 @Service
 public class CommandRun {
@@ -16,6 +13,7 @@ public class CommandRun {
         String outputString = "";
         String line = null;
         try {
+
             while ((line = stdInput.readLine()) != null) {
                 outputString += line;
             }
@@ -32,6 +30,13 @@ public class CommandRun {
         try {
             //boolean status = true;
             Process p = Runtime.getRuntime().exec(command);
+            if (command.equalsIgnoreCase("./Solution")) {
+                OutputStream outputStream = p.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream));
+                writer.write("20");
+                writer.flush();
+                writer.close();
+            }
             terminalResponse.setTerminaloutput(readInputStream(p.getInputStream()));
             terminalResponse.setTerminalError(readInputStream(p.getErrorStream()));
             terminalResponse.setStatus(true);

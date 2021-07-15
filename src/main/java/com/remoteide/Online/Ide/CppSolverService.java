@@ -16,6 +16,10 @@ public class CppSolverService {
         if (!terminalResponse.getStatus()) {
             return "Code not executed";
         }
+        if (terminalResponse.getTerminaloutput().length() > 0) {
+            System.out.println(terminalResponse.getTerminaloutput());
+
+        }
 
         if (terminalResponse.getTerminalError().length() > 0) {
             return terminalResponse.getTerminalError();
