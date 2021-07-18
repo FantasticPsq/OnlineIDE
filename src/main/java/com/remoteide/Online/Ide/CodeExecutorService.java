@@ -15,6 +15,8 @@ public class CodeExecutorService {
     private PythonSolverService pythonSolverService;
     @Autowired
     private JavaScriptSolverService javaScriptSolverService;
+    @Autowired
+    private ProblemSolverFactory problemSolverFactory;
 
     private String getExtension(String language) {
         if (language.equalsIgnoreCase("C++")) {
@@ -47,15 +49,8 @@ public class CodeExecutorService {
         } else {
             return "Not Success";
         }
-        if (language.equalsIgnoreCase("C++")) {
-            return cppSolverService.execute(path, input);
-        } else if (language.equalsIgnoreCase("Java")) {
-            return javaSolverService.execute(path, input);
-        } else if (language.equalsIgnoreCase("Python")) {
-            return pythonSolverService.execute(path);
-        } else {
-            return javaScriptSolverService.execute(path);
-        }
+
+        return problemSolverFactory.getSolver(language, path, input);
 
     }
 

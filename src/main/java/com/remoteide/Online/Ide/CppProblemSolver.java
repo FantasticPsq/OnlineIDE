@@ -1,26 +1,30 @@
 package com.remoteide.Online.Ide;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class JavaSolverService {
+public class CppProblemSolver implements ProblemSolver {
 
-    @Autowired
-    private CommandRun commandRun;
 
-    public String execute( String path, String input) {
-        String command = "javac " + path;
+    @Override
+    public String execute(String path, String input) {
+        String command = "g++ " + path + " -o " + "Solution";
         TerminalResponse terminalResponse = commandRun.compilerCommandRun(command, null);
         if (!terminalResponse.getStatus()) {
             return "Code not executed";
+        }
+        if (terminalResponse.getTerminaloutput().length() > 0) {
+            System.out.println(terminalResponse.getTerminaloutput());
+
         }
 
         if (terminalResponse.getTerminalError().length() > 0) {
             return terminalResponse.getTerminalError();
         }
 
-        terminalResponse = commandRun.compilerCommandRun("java Solution", input);
+        terminalResponse = commandRun.compilerCommandRun("./Solution", input);
         if (!terminalResponse.getStatus()) {
             return "Code not executed";
         }

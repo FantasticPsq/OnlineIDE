@@ -37,6 +37,13 @@ public class CommandRun {
                 writer.flush();
                 writer.close();
             }
+            if (command.equalsIgnoreCase("java Solution")) {
+                OutputStream outputStream = p.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream));
+                writer.write(input);
+                writer.flush();
+                writer.close();
+            }
             terminalResponse.setTerminaloutput(readInputStream(p.getInputStream()));
             terminalResponse.setTerminalError(readInputStream(p.getErrorStream()));
             terminalResponse.setStatus(true);
