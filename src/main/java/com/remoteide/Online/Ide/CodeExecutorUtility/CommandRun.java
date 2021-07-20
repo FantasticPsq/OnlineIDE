@@ -1,11 +1,11 @@
-package com.remoteide.Online.Ide;
+package com.remoteide.Online.Ide.CodeExecutorUtility;
 
 import org.springframework.stereotype.Service;
 
 import java.io.*;
 
 @Service
-public class CommandRun {
+public class CommandRun implements ICommandRun {
 
     private String readInputStream(InputStream input) {
         BufferedReader stdInput = new BufferedReader(new
@@ -25,6 +25,7 @@ public class CommandRun {
         return outputString;
     }
 
+    @Override
     public TerminalResponse compilerCommandRun(String command, String input) {
         TerminalResponse terminalResponse = new TerminalResponse(false, "", "");
         try {
@@ -44,6 +45,8 @@ public class CommandRun {
                 writer.flush();
                 writer.close();
             }
+
+
             terminalResponse.setTerminaloutput(readInputStream(p.getInputStream()));
             terminalResponse.setTerminalError(readInputStream(p.getErrorStream()));
             terminalResponse.setStatus(true);
@@ -54,5 +57,6 @@ public class CommandRun {
         }
         return terminalResponse;
     }
+
 
 }

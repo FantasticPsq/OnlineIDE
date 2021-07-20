@@ -1,5 +1,9 @@
-package com.remoteide.Online.Ide;
+package com.remoteide.Online.Ide.CodeExecutorUtility;
 
+
+import com.remoteide.Online.Ide.FileOperationsUtility.FileOperationsService;
+import com.remoteide.Online.Ide.ProblemSolverFactoryUtility.ProblemSolver;
+import com.remoteide.Online.Ide.ProblemSolverFactoryUtility.ProblemSolverFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -7,16 +11,6 @@ import org.springframework.stereotype.Service;
 public class CodeExecutorService {
     @Autowired
     private FileOperationsService fileOperationsService;
-    @Autowired
-    private CppSolverService cppSolverService;
-    @Autowired
-    private JavaSolverService javaSolverService;
-    @Autowired
-    private PythonSolverService pythonSolverService;
-    @Autowired
-    private JavaScriptSolverService javaScriptSolverService;
-    @Autowired
-    private ProblemSolverFactory problemSolverFactory;
 
     private String getExtension(String language) {
         if (language.equalsIgnoreCase("C++")) {
@@ -28,8 +22,6 @@ public class CodeExecutorService {
         } else {
             return "js";
         }
-
-
     }
 
     private String generatePath(String language) {
@@ -38,9 +30,8 @@ public class CodeExecutorService {
     }
 
     public String executeCode(String language, String code, String input) {
-
         String path = generatePath(language);
-    //Why Not Success in both condition
+        //Why Not Success in both condition
         if (fileOperationsService.createFile(path)) {
             boolean response = fileOperationsService.writeToFile(path, code);
             if (response == false) {
@@ -49,9 +40,8 @@ public class CodeExecutorService {
         } else {
             return "Not Success";
         }
-
-        return problemSolverFactory.getSolver(language, path, input);
-
+        ProblemSolverFactory problemSolverFactory = new ProblemSolverFactory();
+        ProblemSolver problemSolver = problemSolverFactory.getSolver(language, new CommandRun());
+        return problemSolver.execute(path, input);
     }
-
 }

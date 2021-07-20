@@ -1,9 +1,7 @@
-package com.remoteide.Online.Ide;
-
-import java.util.Random;
-
+package com.remoteide.Online.Ide.FileOperationsUtility;
 
 public class CodeText {
+
     private String languageString;
     private String code;
     private String input;
@@ -15,9 +13,6 @@ public class CodeText {
     public void setInput(String input) {
         this.input = input;
     }
-
-
-
 
     public String getLanguageString() {
         return languageString;
@@ -34,6 +29,5 @@ public class CodeText {
     public String getCode() {
         return code;
     }
-
-
 }
+

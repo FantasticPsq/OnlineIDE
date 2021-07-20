@@ -1,7 +1,4 @@
-package com.remoteide.Online.Ide;
-
-
-
+package com.remoteide.Online.Ide.CodeExecutorUtility;
 
 public class TerminalResponse {
     private boolean status;
@@ -47,3 +44,4 @@ public class TerminalResponse {
                 '}';
     }
 }
+
